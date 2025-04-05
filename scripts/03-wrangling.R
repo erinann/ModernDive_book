@@ -1,9 +1,4 @@
-## ---- eval=FALSE--------------------------------------------------------------
-## alaska_flights <- flights %>%
-##   filter(carrier == "AS")
-
-
-## ---- message=FALSE-----------------------------------------------------------
+## ----message=FALSE------------------------------------------------------------
 library(dplyr)
 library(ggplot2)
 library(nycflights13)
@@ -11,62 +6,55 @@ library(nycflights13)
 
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## h(g(f(x)))
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## x %>%
-##   f() %>%
-##   g() %>%
-##   h()
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## alaska_flights <- flights %>%
-##   filter(carrier == "AS")
 
 
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## portland_flights <- flights %>%
-##   filter(dest == "PDX")
-## View(portland_flights)
+## ----eval=FALSE---------------------------------------------------------------
+# alaska_flights <- flights %>%
+#   filter(carrier == "AS")
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## btv_sea_flights_fall <- flights %>%
-##   filter(origin == "JFK" & (dest == "BTV" | dest == "SEA") & month >= 10)
-## View(btv_sea_flights_fall)
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## btv_sea_flights_fall <- flights %>%
-##   filter(origin == "JFK", (dest == "BTV" | dest == "SEA"), month >= 10)
-## View(btv_sea_flights_fall)
+## ----eval=FALSE---------------------------------------------------------------
+# portland_flights <- flights %>%
+#   filter(dest == "PDX")
+# View(portland_flights)
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## not_BTV_SEA <- flights %>%
-##   filter(!(dest == "BTV" | dest == "SEA"))
-## View(not_BTV_SEA)
+## ----eval=FALSE---------------------------------------------------------------
+# btv_sea_flights_fall <- flights %>%
+#   filter(origin == "JFK" & (dest == "BTV" | dest == "SEA") & month >= 10)
+# View(btv_sea_flights_fall)
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## flights %>% filter(!dest == "BTV" | dest == "SEA")
+## ----eval=FALSE---------------------------------------------------------------
+# btv_sea_flights_fall <- flights %>%
+#   filter(origin == "JFK", (dest == "BTV" | dest == "SEA"), month >= 10)
+# View(btv_sea_flights_fall)
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## many_airports <- flights %>%
-##   filter(dest == "SEA" | dest == "SFO" | dest == "PDX" |
-##          dest == "BTV" | dest == "BDL")
+## ----eval=FALSE---------------------------------------------------------------
+# not_BTV_SEA <- flights %>%
+#   filter(!(dest == "BTV" | dest == "SEA"))
+# View(not_BTV_SEA)
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## many_airports <- flights %>%
-##   filter(dest %in% c("SEA", "SFO", "PDX", "BTV", "BDL"))
-## View(many_airports)
+## ----eval=FALSE---------------------------------------------------------------
+# flights %>% filter(!dest == "BTV" | dest == "SEA")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# many_airports <- flights %>%
+#   filter(dest == "SEA" | dest == "SFO" | dest == "PDX" |
+#          dest == "BTV" | dest == "BDL")
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# many_airports <- flights %>%
+#   filter(dest %in% c("SEA", "SFO", "PDX", "BTV", "BDL"))
+# View(many_airports)
 
 
 
@@ -77,7 +65,7 @@ library(nycflights13)
 
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
 summary_temp <- weather %>% 
   summarize(mean = mean(temp), std_dev = sd(temp))
 summary_temp
@@ -93,9 +81,9 @@ summary_temp
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## summary_temp <- weather %>%
-##   summarize(mean = mean(temp, na.rm = TRUE)) %>%
-##   summarize(std_dev = sd(temp, na.rm = TRUE))
+# summary_temp <- weather %>%
+#   summarize(mean = mean(temp, na.rm = TRUE)) %>%
+#   summarize(std_dev = sd(temp, na.rm = TRUE))
 
 
 
@@ -110,28 +98,30 @@ summary_monthly_temp <- weather %>%
 summary_monthly_temp
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
 diamonds
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
 diamonds %>% 
   group_by(cut)
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+
+
+## -----------------------------------------------------------------------------
 diamonds %>% 
   group_by(cut) %>% 
   summarize(avg_price = mean(price))
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
 diamonds %>% 
   group_by(cut) %>% 
   ungroup()
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+## -----------------------------------------------------------------------------
 by_origin <- flights %>% 
   group_by(origin) %>% 
   summarize(count = n())
@@ -155,14 +145,11 @@ by_origin_monthly_incorrect
 
 
 
-## \vspace{-0.25in}
-
-## \vspace{-0.25in}
 
 
 
 
-## ---- eval=TRUE---------------------------------------------------------------
+## ----eval=TRUE----------------------------------------------------------------
 weather <- weather %>% 
   mutate(temp_in_C = (temp - 32) / 1.8)
 
@@ -180,14 +167,6 @@ flights <- flights %>%
   mutate(gain = dep_delay - arr_delay)
 
 
-## ----first-five-flights, echo=FALSE-------------------------------------------
-flights %>% 
-  select(dep_delay, arr_delay, gain) %>% 
-  slice(1:5) %>% 
-  kable(
-    caption = "First five rows of departure/arrival delay and gain variables"
-    ) %>% 
-  kable_styling(position = "center", latex_options = "hold_position")
 
 
 ## -----------------------------------------------------------------------------
@@ -205,7 +184,7 @@ gain_summary <- flights %>%
 gain_summary
 
 
-## ----gain-hist, message=FALSE, fig.cap="Histogram of gain variable.", fig.height=3----
+## ----gain-hist, fig.cap="Histogram of gain variable.", message=FALSE, fig.height=3----
 ggplot(data = flights, mapping = aes(x = gain)) +
   geom_histogram(color = "white", bins = 20)
 
@@ -223,7 +202,7 @@ flights <- flights %>%
 
 
 
-## ---- eval--------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 freq_dest <- flights %>% 
   group_by(dest) %>% 
   summarize(num_flights = n())
@@ -241,28 +220,28 @@ freq_dest %>%
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## View(airlines)
+# View(airlines)
 
 
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## flights_joined <- flights %>%
-##   inner_join(airlines, by = "carrier")
-## View(flights)
-## View(flights_joined)
+# flights_joined <- flights %>%
+#   inner_join(airlines, by = "carrier")
+# View(flights)
+# View(flights_joined)
 
 
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## View(airports)
+# View(airports)
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## flights_with_airport_names <- flights %>%
-##   inner_join(airports, by = c("dest" = "faa"))
-## View(flights_with_airport_names)
+## ----eval=FALSE---------------------------------------------------------------
+# flights_with_airport_names <- flights %>%
+#   inner_join(airports, by = c("dest" = "faa"))
+# View(flights_with_airport_names)
 
 
 ## -----------------------------------------------------------------------------
@@ -275,10 +254,10 @@ named_dests <- flights %>%
 named_dests
 
 
-## ---- eval=FALSE--------------------------------------------------------------
-## flights_weather_joined <- flights %>%
-##   inner_join(weather, by = c("year", "month", "day", "hour", "origin"))
-## View(flights_weather_joined)
+## ----eval=FALSE---------------------------------------------------------------
+# flights_weather_joined <- flights %>%
+#   inner_join(weather, by = c("year", "month", "day", "hour", "origin"))
+# View(flights_weather_joined)
 
 
 
@@ -286,111 +265,9 @@ named_dests
 
 
 ## ----eval=FALSE---------------------------------------------------------------
-## joined_flights <- flights %>%
-##   inner_join(airlines, by = "carrier")
-## View(joined_flights)
-
-
-## \vspace{-0.15in}
-
-## **_Learning check_**
-
-## \vspace{-0.1in}
-
-
-
-
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## glimpse(flights)
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## flights %>%
-##   select(carrier, flight)
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## flights_no_year <- flights %>% select(-year)
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## flight_arr_times <- flights %>% select(month:day, arr_time:sched_arr_time)
-## flight_arr_times
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## flights_reorder <- flights %>%
-##   select(year, month, day, hour, minute, time_hour, everything())
-## glimpse(flights_reorder)
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## flights %>% select(starts_with("a"))
-## flights %>% select(ends_with("delay"))
-## flights %>% select(contains("time"))
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## flights_time_new <- flights %>%
-##   select(dep_time, arr_time) %>%
-##   rename(departure_time = dep_time, arrival_time = arr_time)
-## glimpse(flights_time_new)
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## named_dests %>% top_n(n = 10, wt = num_flights)
-
-
-## ---- eval=FALSE--------------------------------------------------------------
-## named_dests  %>%
-##   top_n(n = 10, wt = num_flights) %>%
-##   arrange(desc(num_flights))
-
-
-
-
-
-
-## ----wrangle-summary-table, echo=FALSE, message=FALSE-------------------------
-# The following Google Doc is published to CSV and loaded using read_csv():
-# https://docs.google.com/spreadsheets/d/1nRkXfYMQiTj79c08xQPY0zkoJSpde3NC1w6DRhsWCss/edit#gid=0
-
-if(!file.exists("rds/ch4_scenarios.rds")){
-  ch4_scenarios <- "https://docs.google.com/spreadsheets/d/e/2PACX-1vRgwl1lugQA6zxzfB6_0hM5vBjXkU7cbUVYYXLcWeaRJ9HmvNXyCjzJCgiGW8HCe1kvjLCGYHf-BvYL/pub?gid=0&single=true&output=csv" %>% 
-    read_csv(na = "") %>% 
-    select(-X1)
-  write_rds(ch4_scenarios, "rds/ch4_scenarios.rds")
-} else {
-  ch4_scenarios <- read_rds("rds/ch4_scenarios.rds")
-}
-
-if(knitr:::is_latex_output()){
-  ch4_scenarios %>% 
-    # Weird tick marks show up in PDF:
-    mutate(
-      Verb = str_replace_all(Verb, "`", ""),
-      `Data wrangling operation` = str_replace_all(`Data wrangling operation`, "`", ""),
-    ) %>% 
-    kable(
-      caption = "Summary of data wrangling verbs", 
-      booktabs = TRUE,
-      linesep = "",
-      format = "latex"
-    ) %>% 
-    kable_styling(font_size = ifelse(knitr:::is_latex_output(), 10, 16),
-                  latex_options = c("hold_position")) %>%
-    column_spec(1, width = "0.9in") %>% 
-    column_spec(2, width = "4in")
-} else {
-  ch4_scenarios %>% 
-    kable(
-      caption = "Summary of data wrangling verbs", 
-      booktabs = TRUE,
-      format = "html"
-    )
-}
+# joined_flights <- flights %>%
+#   inner_join(airlines, by = "carrier")
+# View(joined_flights)
 
 
 
@@ -399,15 +276,51 @@ if(knitr:::is_latex_output()){
 
 
 
-## ----echo=FALSE, results="asis"-----------------------------------------------
-if(knitr::is_latex_output()){
-  cat("Solutions to all *Learning checks* can be found online in [Appendix D](https://moderndive.com/D-appendixD.html).")
-} 
 
 
+## ----eval=FALSE---------------------------------------------------------------
+# glimpse(flights)
 
 
-## ----dplyr-cheatsheet, echo=FALSE, fig.cap="Data Transformation with dplyr cheatsheet."----
-if(knitr::is_html_output())
-  include_graphics("images/cheatsheets/dplyr_cheatsheet-1.png")
+## ----eval=FALSE---------------------------------------------------------------
+# flights %>%
+#   select(carrier, flight)
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# flights_no_year <- flights %>% select(-year)
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# flight_arr_times <- flights %>% select(month:day, arr_time:sched_arr_time)
+# flight_arr_times
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# flights_reorder <- flights %>%
+#   select(year, month, day, hour, minute, time_hour, everything())
+# glimpse(flights_reorder)
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# flights %>% select(starts_with("a"))
+# flights %>% select(ends_with("delay"))
+# flights %>% select(contains("time"))
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# flights_time_new <- flights %>%
+#   select(dep_time, arr_time) %>%
+#   rename(departure_time = dep_time, arrival_time = arr_time)
+# glimpse(flights_time_new)
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# named_dests %>% top_n(n = 10, wt = num_flights)
+
+
+## ----eval=FALSE---------------------------------------------------------------
+# named_dests  %>%
+#   top_n(n = 10, wt = num_flights) %>%
+#   arrange(desc(num_flights))
 
